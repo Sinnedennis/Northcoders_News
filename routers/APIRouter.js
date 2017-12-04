@@ -1,19 +1,19 @@
 const { getAllTopics, getArticlesByTopic, getAllArticles, getCommentsByArticle, postCommentByArticle, putVoteOnArticle, deleteCommentById, getUserByUseName } = require('../controllers/controller.js');
 const APIRouter = require('express').Router();
 
-APIRouter.get('/topics', getAllTopics)
+APIRouter.get('/topics', getAllTopics);
 
-APIRouter.get('/topics/:topic_id/articles', getArticlesByTopic)
+APIRouter.get('/topics/:topic_id/articles', getArticlesByTopic);
 
-APIRouter.get('/articles', getAllArticles)
+APIRouter.get('/articles', getAllArticles);
 APIRouter.route('/articles/:article_id/comments')
-    .get(getCommentsByArticle)
-    .post(postCommentByArticle)
+  .get(getCommentsByArticle)
+  .post(postCommentByArticle);
 
-APIRouter.put('/articles/:article_id', putVoteOnArticle)
+APIRouter.put('/articles/:article_id', putVoteOnArticle);
 
-APIRouter.delete('/comments/:comment_id', deleteCommentById)
+APIRouter.delete('/comments/:comment_id', deleteCommentById);
 
-APIRouter.get('/users/:username', getUserByUseName)
+APIRouter.get('/users/:username', getUserByUseName);
 
-module.exports = APIRouter 
+module.exports = APIRouter; 

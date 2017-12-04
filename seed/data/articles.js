@@ -1,4 +1,4 @@
-var footballArticles = [
+const footballArticles = [
   {
     title: "What does Jose Mourinho's handwriting say about his personality?",
     body: "Jose Mourinho was at The O2 on Sunday night to watch Dominic Thiem in action against Novak Djokovic. Thiem took the first set before Djokovic fought back to claim the victory, but Manchester United's manager was clearly impressed with the Austrian's performance."
@@ -49,7 +49,7 @@ var footballArticles = [
   },
 ];
 
-var cookingArticles = [
+const cookingArticles = [
   {
     title: "Sweet potato & butternut squash soup with lemon & garlic toast",
     body: "Roast your vegetables in honey before blitzing into this velvety smooth, spiced soup - served with garlicky, zesty ciabatta slices for dipping"
@@ -100,7 +100,7 @@ var cookingArticles = [
   },
 ];
 
-var codingArticles = [
+const codingArticles = [
   {
     title: "Running a Node App",
     body: "This is part two of a series on how to get up and running with Systemd and Node.js. This part dives deeper into how to successfully run your app with systemd long-term, and how to set it up in a production environment."

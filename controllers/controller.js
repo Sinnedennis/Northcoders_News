@@ -1,5 +1,5 @@
 const { Articles, Comments, Topics, Users } = require('../models/models');
-
+const { getVoteValue } = require('./utils.js');
 
 function getAllTopics(req, res, next) {
   Topics.find()
@@ -59,14 +59,12 @@ function postCommentByArticle(req, res, next) {
 }
 
 function putVoteOnArticle(req, res, next) {
-  let vote;
-  if (req.query.vote.toLowerCase() === 'up') vote = 1;
-  else if (req.query.vote.toLowerCase() === 'down') vote = -1;
-  else vote = 0;
 
-  Articles.findByIdAndUpdate(req.params.article_id, { $inc: { votes: vote } }, { new: true })
+  const vote = getVoteValue(req);
+
+  Articles.findByIdAndUpdate(req.params.article_id, { $inc: { votes: vote.value } }, { new: true })
     .then((article) => {
-      res.send({ message: 'Article upvoted!', article });
+      res.send({ message: `Article ${vote.string}voted!`, article });
     })
     .catch(err => {
       if (err.name === 'CastError') return next({ err, type: 404 });
@@ -92,4 +90,18 @@ function getUserByUseName(req, res, next) {
     });
 }
 
-module.exports = { getAllTopics, getArticlesByTopic, getAllArticles, getCommentsByArticle, postCommentByArticle, putVoteOnArticle, deleteCommentById, getUserByUseName };
+function putVoteOnComment (req, res, next) {
+
+  const vote = getVoteValue(req);
+
+  Comments.findByIdAndUpdate(req.params.comment_id, { $inc: { votes: vote.value } }, { new: true })
+    .then((comment) => {
+      res.send({ message: `Comment ${vote.string}voted!`, comment});
+    })
+    .catch(err => {
+      if (err.name === 'CastError') return next({ err, type: 404 });
+      next(err);
+    })
+}
+
+module.exports = { getAllTopics, getArticlesByTopic, getAllArticles, getCommentsByArticle, postCommentByArticle, putVoteOnArticle, deleteCommentById, getUserByUseName, putVoteOnComment };

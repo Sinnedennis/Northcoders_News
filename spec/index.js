@@ -79,7 +79,7 @@ describe('API', () => {
 
   describe('POST /articles/:article_id/comments', () => {
     it('receives a {comment} and adds it to a specific article in the db', () => {
-      let commentObj = { comment: 'This is a test comment' };
+      const commentObj = { comment: 'This is a test comment' };
 
       return request(app).post(`/api/articles/${usefulData.articles[0]._id}/comments`)
         .send(commentObj)
@@ -135,37 +135,37 @@ describe('API', () => {
   });
 
   describe('PUT /comments/:comment_id?vote=up', () => {
-    it('upvotes an article', () => {
-      expect(usefulData.articles[0].votes).to.equal(0);
+    it('upvotes an comment', () => {
+      expect(usefulData.comments[0].votes).to.equal(0);
       return request(app)
-        .put(`/api/articles/${usefulData.articles[0]._id}?vote=up`)
+        .put(`/api/comments/${usefulData.comments[0]._id}?vote=up`)
         .expect(200)
         .then(res => {
-          expect(res.body.article._id).to.equal(String(usefulData.articles[0]._id));
-          expect(res.body.article.votes).to.equal(1);
-          expect(usefulData.articles[0].votes).to.equal(0);
+          expect(res.body.comment._id).to.equal(String(usefulData.comments[0]._id));
+          expect(res.body.comment.votes).to.equal(1);
+          expect(usefulData.comments[0].votes).to.equal(0);
         });
     });
-    it('downvotes an article', () => {
-      expect(usefulData.articles[0].votes).to.equal(0);
+    it('downvotes an comment', () => {
+      expect(usefulData.comments[0].votes).to.equal(0);
       return request(app)
-        .put(`/api/articles/${usefulData.articles[0]._id}?vote=down`)
+        .put(`/api/comments/${usefulData.comments[0]._id}?vote=down`)
         .expect(200)
         .then(res => {
-          expect(res.body.article._id).to.equal(String(usefulData.articles[0]._id));
-          expect(res.body.article.votes).to.equal(-1);
-          expect(usefulData.articles[0].votes).to.equal(0);
+          expect(res.body.comment._id).to.equal(String(usefulData.comments[0]._id));
+          expect(res.body.comment.votes).to.equal(-1);
+          expect(usefulData.comments[0].votes).to.equal(0);
         });
     });
-    it('does not affect an article\'s votes if invalid query is given', () => {
-      expect(usefulData.articles[0].votes).to.equal(0);
+    it('does not affect an comment\'s votes if invalid query is given', () => {
+      expect(usefulData.comments[0].votes).to.equal(0);
       return request(app)
-        .put(`/api/articles/${usefulData.articles[0]._id}?vote=sideways`)
+        .put(`/api/comments/${usefulData.comments[0]._id}?vote=sideways`)
         .expect(200)
         .then(res => {
-          expect(res.body.article._id).to.equal(String(usefulData.articles[0]._id));
-          expect(res.body.article.votes).to.equal(0);
-          expect(usefulData.articles[0].votes).to.equal(0);
+          expect(res.body.comment._id).to.equal(String(usefulData.comments[0]._id));
+          expect(res.body.comment.votes).to.equal(0);
+          expect(usefulData.comments[0].votes).to.equal(0);
         });
     });
   });

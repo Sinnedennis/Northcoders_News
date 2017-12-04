@@ -15,5 +15,17 @@
   "bugs": {
     "url": "https://github.com/Sinnedennis/Northcoders_News_Back_End/issues"
   },
-  "homepage": "https://github.com/Sinnedennis/Northcoders_News_Back_End#readme"
+  "homepage": "https://github.com/Sinnedennis/Northcoders_News_Back_End#readme",
+  "dependencies": {
+    "async": "^2.6.0",
+    "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
+    "chance": "^1.0.12",
+    "express": "^4.16.2",
+    "log4js": "^2.3.12",
+    "moment": "^2.19.3",
+    "mongoose": "^4.13.6",
+    "supertest": "^3.0.0",
+    "underscore": "^1.8.3"
+  }
 }

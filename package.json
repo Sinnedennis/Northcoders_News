@@ -1,0 +1,19 @@
+{
+  "name": "northcoders_news_back_end",
+  "version": "1.0.0",
+  "description": "A reddit-like web app using React.js, Redux, and MongoDB ",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha spec/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sinnedennis/Northcoders_News_Back_End.git"
+  },
+  "author": "Dennis Foster",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sinnedennis/Northcoders_News_Back_End/issues"
+  },
+  "homepage": "https://github.com/Sinnedennis/Northcoders_News_Back_End#readme"
+}

@@ -6,14 +6,16 @@ const chance = new Chance();
 const _ = require('underscore');
 const async = require('async');
 const mongoose = require('mongoose');
+mongoose.Promise = Promise;
 const log4js = require('log4js');
 const logger = log4js.getLogger();
 const moment = require('moment');
 const DBs = require('../config').DB;
 
-mongoose.connect(DBs.dev, function (err) {
-  if (!err) {
-    logger.info(`connected to database ${DBs.dev}`);
+
+mongoose.connect(DBs.dev, { useMongoClient: true })
+  .then(() => {
+    console.log(`connected to database ${DBs.dev}`); // eslint-disable-line
     mongoose.connection.db.dropDatabase();
     async.waterfall([
       addUsers,
@@ -23,19 +25,20 @@ mongoose.connect(DBs.dev, function (err) {
       addNorthcoderUser
     ], function (err) {
       if (err) {
-        logger.error('ERROR SEEDING :O');
+        console.log('ERROR SEEDING :O'); // eslint-disable-line
         console.log(JSON.stringify(err)); // eslint-disable-line
         process.exit();
       }
-      logger.info('DONE SEEDING!!');
+      console.log('DONE SEEDING!!'); // eslint-disable-line
       process.exit();
     });
-  } else {
-    logger.error('DB ERROR');
+  })
+  .catch(err => {
+    console.log('DB ERROR'); // eslint-disable-line
     console.log(JSON.stringify(err)); // eslint-disable-line
     process.exit();
-  }
-});
+  });
+
 
 function addNorthcoderUser(done) {
   const userDoc = new models.Users(
@@ -54,7 +57,7 @@ function addNorthcoderUser(done) {
 }
 
 function addUsers(done) {
-  logger.info('adding users');
+  console.log('adding users');
   async.eachSeries(userData, function (user, cb) {
     const userDoc = new models.Users(user);
     userDoc.save(function (err) {
@@ -70,7 +73,7 @@ function addUsers(done) {
 }
 
 function addTopics(done) {
-  logger.info('adding topics');
+  console.log('adding topics');
   let topicDocs = [];
   async.eachSeries(['Football', 'Cooking', 'Coding'], function (topic, cb) {
     const topicObj = {
@@ -80,10 +83,10 @@ function addTopics(done) {
     const topicDoc = new models.Topics(topicObj);
     topicDoc.save(function (err, doc) {
       if (err) {
-        logger.error(JSON.stringify(err));
+        console.log(JSON.stringify(err));
         return cb(err);
       }
-      logger.info(JSON.stringify(doc));
+      console.log(JSON.stringify(doc));
       topicDocs.push(topicObj);
       return cb();
     });
@@ -94,7 +97,7 @@ function addTopics(done) {
 }
 
 function addArticles(topicDocs, done) {
-  logger.info('adding articles');
+  console.log('adding articles');
   // will be a big array of strings
   let docIds = [];
   async.eachSeries(topicDocs, function (topic, cb) {
@@ -107,7 +110,7 @@ function addArticles(topicDocs, done) {
       const usersArticleDoc = new models.Articles(usersArticle);
       usersArticleDoc.save(function (err, doc) {
         if (err) {
-          logger.error(JSON.stringify(err));
+          console.log(JSON.stringify(err));
           return cb(err);
         }
         articles.shift();
@@ -119,7 +122,7 @@ function addArticles(topicDocs, done) {
         const usersArticleTwoDoc = new models.Articles(usersArticleTwo);
         usersArticleTwoDoc.save(function (err, doc2) {
           if (err) {
-            logger.error(JSON.stringify(err));
+            console.log(JSON.stringify(err));
             return cb(err);
           }
           articles.shift();
@@ -139,11 +142,11 @@ function addArticles(topicDocs, done) {
 }
 
 function addComments(docIds, done) {
-  logger.info('adding comments');
+  console.log('adding comments');
   async.eachSeries(docIds, function (id, cb) {
     async.eachSeries(_.range(_.sample(_.range(5, 11))), function (x, cbTwo) {
       const comment = {
-        body: chance.paragraph({sentences: _.sample(_.range(2, 5))}),
+        body: chance.paragraph({ sentences: _.sample(_.range(2, 5)) }),
         belongs_to: id,
         created_by: userData[_.sample(_.range(6))].username,
         votes: _.sample(_.range(2, 11)),
@@ -168,10 +171,10 @@ function addComments(docIds, done) {
 }
 
 function getRandomStamp() {
-  return new Date (
-    moment().subtract(_.sample(_.range(1,7)), 'days')
-      .subtract(_.sample(_.range(1,24)), 'hours')
-      .subtract(_.sample(_.range(1,60)), 'minutes')
+  return new Date(
+    moment().subtract(_.sample(_.range(1, 7)), 'days')
+      .subtract(_.sample(_.range(1, 24)), 'hours')
+      .subtract(_.sample(_.range(1, 60)), 'minutes')
       .format()
   ).getTime();
 }

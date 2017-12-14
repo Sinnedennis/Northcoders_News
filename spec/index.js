@@ -196,6 +196,21 @@ describe('API', () => {
     });
   });
 
+  describe('GET /users/', () => {
+    it('sends back all users', () => {
+      return request(app).get(`/api/users/`)
+        .expect(200)
+        .then((res) => {
+          expect(res.body.length).to.equal(usefulData.user.length);
+
+          res.body.forEach((user) => {
+            expect(user).to.have.a.property('username');
+            expect(user).to.have.a.property('name');
+          })
+        });
+    });
+  });
+
   describe('GET /users/:username', () => {
     it('sends back a user based on username param', () => {
       return request(app).get(`/api/users/${usefulData.user.username}`)

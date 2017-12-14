@@ -90,13 +90,24 @@ function getUserByUseName(req, res, next) {
     });
 }
 
-function putVoteOnComment (req, res, next) {
+function getAllUsers (req, res, next) {
+  Users.find()
+  .then(users => {
+    res.send(users);
+  })
+  .catch(err => {
+    if (err.name === 'CastError') return next({ err, type: 404 });
+    next(err);
+  });
+}
+
+function putVoteOnComment(req, res, next) {
 
   const vote = getVoteValue(req);
 
   Comments.findByIdAndUpdate(req.params.comment_id, { $inc: { votes: vote.value } }, { new: true })
     .then((comment) => {
-      res.send({ message: `Comment ${vote.string}voted!`, comment});
+      res.send({ message: `Comment ${vote.string}voted!`, comment });
     })
     .catch(err => {
       if (err.name === 'CastError') return next({ err, type: 404 });
@@ -104,4 +115,4 @@ function putVoteOnComment (req, res, next) {
     })
 }
 
-module.exports = { getAllTopics, getArticlesByTopic, getAllArticles, getCommentsByArticle, postCommentByArticle, putVoteOnArticle, deleteCommentById, getUserByUseName, putVoteOnComment };
+module.exports = { getAllTopics, getArticlesByTopic, getAllArticles, getCommentsByArticle, postCommentByArticle, putVoteOnArticle, deleteCommentById, getUserByUseName, getAllUsers, putVoteOnComment };

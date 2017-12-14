@@ -3,12 +3,24 @@ const { Users, Comments, Topics, Articles } = require('../models/models');
 const savedData = {};
 
 function saveUser () {
-  const user = new Users({
-    username: 'northcoder',
-    name: 'Awesome Northcoder',
-    avatar_url: 'https://avatars3.githubusercontent.com/u/6791502?v=3&s=200'
-  });
-  return user.save();
+  const users = [
+    {
+      username: 'northcoder',
+      name: 'Awesome Northcoder',
+      avatar_url: 'https://avatars3.githubusercontent.com/u/6791502?v=3&s=200'
+    },
+    {
+      username: 'southcoder',
+      name: 'Awesome Southcoder',
+      avatar_url: 'https://avatars3.githubusercontent.com/u/6791502?v=3&s=200'
+    },
+    {
+      username: 'Danny',
+      name: 'Haw Baw',
+      avatar_url: 'https://avatars3.githubusercontent.com/u/6791502?v=3&s=200'
+    }
+  ].map(a => new Users(a).save());
+  return Promise.all(users);
 }
 
 function saveTopics() {

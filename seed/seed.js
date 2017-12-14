@@ -7,8 +7,7 @@ const _ = require('underscore');
 const async = require('async');
 const mongoose = require('mongoose');
 mongoose.Promise = Promise;
-const log4js = require('log4js');
-const logger = log4js.getLogger();
+
 const moment = require('moment');
 const DBs = require('../config').DB;
 

@@ -3,6 +3,7 @@ if (!process.env.NODE_ENV) process.env.NODE_ENV = 'dev';
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const app = express();
 const config = require('./config');
 const db = config.DB[process.env.NODE_ENV] || process.env.DB;
@@ -14,7 +15,7 @@ mongoose.connect(db, {useMongoClient: true})
   .then(() => console.log('successfully connected to', db)) // eslint-disable-line
   .catch(err => console.log('connection failed', err)); // eslint-disable-line
 
-app.use(bodyParser.json());
+app.use(cors(), bodyParser.json());
 
 // API Router
 app.use('/api', APIRouter);

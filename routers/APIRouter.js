@@ -1,4 +1,4 @@
-const { getAllTopics, getArticlesByTopic, getAllArticles, getCommentsByArticle, postCommentByArticle, putVoteOnArticle, deleteCommentById, getUserByUseName , putVoteOnComment, getAllUsers} = require('../controllers/controller.js');
+const { getAllTopics, getArticlesByTopic, getAllArticles, getCommentsByArticle, postCommentByArticle, putVoteOnArticle, deleteCommentById, getUserByUseName , putVoteOnComment, getAllUsers, getArticleById} = require('../controllers/controller.js');
 const APIRouter = require('express').Router();
 
 APIRouter.get('/topics', getAllTopics);
@@ -6,6 +6,7 @@ APIRouter.get('/topics', getAllTopics);
 APIRouter.get('/topics/:topic_id/articles', getArticlesByTopic);
 
 APIRouter.get('/articles', getAllArticles);
+APIRouter.get('/articles/:article_id', getArticleById);
 APIRouter.route('/articles/:article_id/comments')
   .get(getCommentsByArticle)
   .post(postCommentByArticle);

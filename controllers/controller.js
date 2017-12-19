@@ -26,6 +26,16 @@ function getAllArticles(req, res, next) {
     .catch(err => next(err));
 }
 
+function getArticleById(req, res, next) {
+  const articleId = req.params.article_id;
+
+  Articles.findById(articleId)
+    .then(article => {
+      res.send({ article })
+    })
+    .catch(err => next(err));
+}
+
 function getCommentsByArticle(req, res, next) {
   const articleID = req.params.article_id;
   Comments.find({ belongs_to: articleID })
@@ -115,4 +125,4 @@ function putVoteOnComment(req, res, next) {
     })
 }
 
-module.exports = { getAllTopics, getArticlesByTopic, getAllArticles, getCommentsByArticle, postCommentByArticle, putVoteOnArticle, deleteCommentById, getUserByUseName, getAllUsers, putVoteOnComment };
+module.exports = { getAllTopics, getArticlesByTopic, getAllArticles, getCommentsByArticle, postCommentByArticle, putVoteOnArticle, deleteCommentById, getUserByUseName, getAllUsers, putVoteOnComment, getArticleById };

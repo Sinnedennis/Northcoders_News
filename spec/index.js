@@ -59,6 +59,17 @@ describe('API', () => {
     });
   });
 
+  describe('GET /article/:article_id', () => {
+    it.only('sends back the correct object containing all articles with a status code of 200', () => {
+      return request(app).get(`/api/articles/${usefulData.articles[0]._id}`)
+        .expect(200)
+        .then(res => {
+          expect(res.body.article).to.be.an('object');
+          expect(res.body.article.belongs_to).to.be.a('string');
+          expect(res.body.article.title).to.be.a('string');
+        });
+    });
+  });
   describe('GET /articles/:article_id/comments', () => {
     it('sends back the correct object containing all comments of an article with a status code of 200', () => {
       return request(app).get(`/api/articles/${usefulData.articles[0]._id}/comments`)

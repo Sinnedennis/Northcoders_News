@@ -60,7 +60,7 @@ describe('API', () => {
   });
 
   describe('GET /article/:article_id', () => {
-    it.only('sends back the correct object containing all articles with a status code of 200', () => {
+    it('sends back the correct object containing all articles with a status code of 200', () => {
       return request(app).get(`/api/articles/${usefulData.articles[0]._id}`)
         .expect(200)
         .then(res => {
@@ -136,12 +136,7 @@ describe('API', () => {
       expect(usefulData.articles[0].votes).to.equal(0);
       return request(app)
         .put(`/api/articles/${usefulData.articles[0]._id}?vote=sideways`)
-        .expect(200)
-        .then(res => {
-          expect(res.body.article._id).to.equal(String(usefulData.articles[0]._id));
-          expect(res.body.article.votes).to.equal(0);
-          expect(usefulData.articles[0].votes).to.equal(0);
-        });
+        .expect(400);
     });
   });
 

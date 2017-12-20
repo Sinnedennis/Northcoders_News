@@ -72,9 +72,13 @@ function putVoteOnArticle(req, res, next) {
 
   const vote = getVoteValue(req);
 
+  if (vote.string === 'not ') {
+    res.status(400);
+    res.send({ message: `Article not voted.`, wasSuccessful: false })
+  }
   Articles.findByIdAndUpdate(req.params.article_id, { $inc: { votes: vote.value } }, { new: true })
     .then((article) => {
-      res.send({ message: `Article ${vote.string}voted!`, article });
+      res.send({ message: `Article ${vote.string}voted!`, wasSuccessful: true, article });
     })
     .catch(err => {
       if (err.name === 'CastError') return next({ err, type: 404 });

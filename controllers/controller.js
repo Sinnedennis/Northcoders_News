@@ -72,13 +72,14 @@ function putVoteOnArticle(req, res, next) {
 
   const vote = getVoteValue(req);
 
-  if (vote.string === 'not ') {
+  if (vote === false) {
     res.status(400);
     res.send({ message: `Article not voted.`, wasSuccessful: false })
   }
+
   Articles.findByIdAndUpdate(req.params.article_id, { $inc: { votes: vote.value } }, { new: true })
     .then((article) => {
-      res.send({ message: `Article ${vote.string}voted!`, wasSuccessful: true, article });
+      res.send({ message: `Article ${vote.string}voted!`, wasSuccessful: true, data: article });
     })
     .catch(err => {
       if (err.name === 'CastError') return next({ err, type: 404 });
@@ -119,9 +120,14 @@ function putVoteOnComment(req, res, next) {
 
   const vote = getVoteValue(req);
 
+  if (vote === false) {
+    res.status(400);
+    res.send({ message: `Article not voted.`, wasSuccessful: false })
+  }
+
   Comments.findByIdAndUpdate(req.params.comment_id, { $inc: { votes: vote.value } }, { new: true })
     .then((comment) => {
-      res.send({ message: `Comment ${vote.string}voted!`, comment });
+      res.send({ message: `Comment ${vote.string}voted!`, wasSuccessful: false, data: comment });
     })
     .catch(err => {
       if (err.name === 'CastError') return next({ err, type: 404 });

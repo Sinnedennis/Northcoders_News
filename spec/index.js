@@ -116,8 +116,8 @@ describe('API', () => {
         .put(`/api/articles/${usefulData.articles[0]._id}?vote=up`)
         .expect(200)
         .then(res => {
-          expect(res.body.article._id).to.equal(String(usefulData.articles[0]._id));
-          expect(res.body.article.votes).to.equal(1);
+          expect(res.body.data._id).to.equal(String(usefulData.articles[0]._id));
+          expect(res.body.data.votes).to.equal(1);
           expect(usefulData.articles[0].votes).to.equal(0);
         });
     });
@@ -127,8 +127,8 @@ describe('API', () => {
         .put(`/api/articles/${usefulData.articles[0]._id}?vote=down`)
         .expect(200)
         .then(res => {
-          expect(res.body.article._id).to.equal(String(usefulData.articles[0]._id));
-          expect(res.body.article.votes).to.equal(-1);
+          expect(res.body.data._id).to.equal(String(usefulData.articles[0]._id));
+          expect(res.body.data.votes).to.equal(-1);
           expect(usefulData.articles[0].votes).to.equal(0);
         });
     });
@@ -147,8 +147,8 @@ describe('API', () => {
         .put(`/api/comments/${usefulData.comments[0]._id}?vote=up`)
         .expect(200)
         .then(res => {
-          expect(res.body.comment._id).to.equal(String(usefulData.comments[0]._id));
-          expect(res.body.comment.votes).to.equal(1);
+          expect(res.body.data._id).to.equal(String(usefulData.comments[0]._id));
+          expect(res.body.data.votes).to.equal(1);
           expect(usefulData.comments[0].votes).to.equal(0);
         });
     });
@@ -158,8 +158,8 @@ describe('API', () => {
         .put(`/api/comments/${usefulData.comments[0]._id}?vote=down`)
         .expect(200)
         .then(res => {
-          expect(res.body.comment._id).to.equal(String(usefulData.comments[0]._id));
-          expect(res.body.comment.votes).to.equal(-1);
+          expect(res.body.data._id).to.equal(String(usefulData.comments[0]._id));
+          expect(res.body.data.votes).to.equal(-1);
           expect(usefulData.comments[0].votes).to.equal(0);
         });
     });
@@ -167,12 +167,7 @@ describe('API', () => {
       expect(usefulData.comments[0].votes).to.equal(0);
       return request(app)
         .put(`/api/comments/${usefulData.comments[0]._id}?vote=sideways`)
-        .expect(200)
-        .then(res => {
-          expect(res.body.comment._id).to.equal(String(usefulData.comments[0]._id));
-          expect(res.body.comment.votes).to.equal(0);
-          expect(usefulData.comments[0].votes).to.equal(0);
-        });
+        .expect(400);
     });
   });
 

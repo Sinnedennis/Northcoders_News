@@ -11,10 +11,7 @@ module.exports = {
       vote.value = -1;
       vote.string = 'down'
 
-    } else {
-      vote.value = 0;
-      vote.string = 'not ';
-    }
+    } else return false;
 
     return vote;
   }

@@ -3,7 +3,7 @@ module.exports = {
 
     let vote = {};
 
-    if (req.query.vote === 'up') {
+    if (req.query.vote.toLowerCase() === 'up') {
       vote.value = 1;
       vote.string = 'up';
 

@@ -79,7 +79,7 @@ function putVoteOnArticle(req, res, next) {
 
   Articles.findByIdAndUpdate(req.params.article_id, { $inc: { votes: vote.value } }, { new: true })
     .then((article) => {
-      res.send({ message: `Article ${vote.string}voted!`, wasSuccessful: true, data: article });
+      res.send({ message: `Article ${vote.string}voted!`, wasSuccessful: true, votedData: article });
     })
     .catch(err => {
       if (err.name === 'CastError') return next({ err, type: 404 });
@@ -127,7 +127,7 @@ function putVoteOnComment(req, res, next) {
 
   Comments.findByIdAndUpdate(req.params.comment_id, { $inc: { votes: vote.value } }, { new: true })
     .then((comment) => {
-      res.send({ message: `Comment ${vote.string}voted!`, wasSuccessful: false, data: comment });
+      res.send({ message: `Comment ${vote.string}voted!`, wasSuccessful: true, votedData: comment });
     })
     .catch(err => {
       if (err.name === 'CastError') return next({ err, type: 404 });

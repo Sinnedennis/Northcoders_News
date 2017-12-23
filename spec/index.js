@@ -88,23 +88,20 @@ describe('API', () => {
     });
   });
 
-  describe('POST /articles/:article_id/comments', () => {
+  describe.only('POST /articles/:article_id/comments', () => {
     it('receives a {comment} and adds it to a specific article in the db', () => {
-      const commentObj = { comment: 'This is a test comment' };
 
       return request(app).post(`/api/articles/${usefulData.articles[0]._id}/comments`)
-        .send(commentObj)
+        .send({commentText: 'This is a test comment'})
         .expect(200)
         .then(res => {
           expect(res.body.message).to.equal('Comment successfully inserted!');
-          expect(res.body.comment.body).to.equal(commentObj.comment);
+          expect(res.body.comment.body).to.equal('This is a test comment');
 
-          commentObj._id = res.body.comment._id;
           return Comments.findById(res.body.comment._id);
         })
         .then(queryRes => {
-          expect(String(queryRes._id)).to.equal(commentObj._id);
-          expect(queryRes.body).to.equal(commentObj.comment);
+          expect(queryRes.body).to.equal('This is a test comment');
         });
     });
   });

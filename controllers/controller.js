@@ -47,22 +47,26 @@ function getCommentsByArticle(req, res, next) {
 }
 
 function postCommentByArticle(req, res, next) {
-  new Comments(
+
+  let newComment = new Comments(
     {
-      body: req.body.comment,
-      belongs_to: req.params.article_id
+      body: String(req.body.commentText),
+      belongs_to: req.params.article_id,
+      created_by: req.body.created_by,
     })
-    .save()
-    .then(() => {
-      return Comments.find({ body: req.body.comment, belongs_to: req.params.article_id });
+
+    newComment.save()
+    .then((savedComment) => {
+      return Comments.findById(savedComment._id);
     })
     .then((insertedComment) => {
       res.send({
         message: 'Comment successfully inserted!',
-        comment: insertedComment[0],
+        comment: insertedComment,
       });
     })
     .catch(err => {
+      console.log(err);
       if (err.name === 'CastError') return next({ err, type: 404 });
       next(err);
     });

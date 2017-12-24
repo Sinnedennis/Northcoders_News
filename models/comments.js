@@ -12,7 +12,7 @@ const CommentSchema = new Schema({
   },
   created_at: {
     type: Number,
-    default: new Date().getTime()
+    default: Date.now()
   },
   votes: {
     type: Number,

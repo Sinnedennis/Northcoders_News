@@ -88,7 +88,7 @@ describe('API', () => {
     });
   });
 
-  describe.only('POST /articles/:article_id/comments', () => {
+  describe('POST /articles/:article_id/comments', () => {
     it('receives a {comment} and adds it to a specific article in the db', () => {
 
       return request(app).post(`/api/articles/${usefulData.articles[0]._id}/comments`)

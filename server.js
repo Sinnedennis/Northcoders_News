@@ -17,9 +17,13 @@ mongoose.connect(db, {useMongoClient: true})
 
 app.use(cors(), bodyParser.json());
 
+
 // API Router
 app.use('/api', APIRouter);
 
+app.use('/', (req, res) => {
+  res.status(200).send({message: 'Hello! This the backend API used in my Northcoders News project. Click the example links below to see the endpoints available'});
+});
 
 app.use('/*', (req, res) => {
   res.status(404).send({message: 'Page Not Found'});

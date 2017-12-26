@@ -104,6 +104,32 @@ describe('API', () => {
           expect(queryRes.body).to.equal('This is a test comment');
         });
     });
+
+    it('generates a new timestamp for each comment', () => {
+      let timeStamp1, timeStamp2;
+
+      return request(app).post(`/api/articles/${usefulData.articles[0]._id}/comments`)
+        .send({commentText: 'This is a test comment'})
+        .expect(200)
+        .then(res => {
+          timeStamp1 = res.body.comment.created_at;
+
+          return new Promise(function(resolve) { 
+            setTimeout(resolve, 200)
+          });
+        })
+        .then(() => {
+          return request(app).post(`/api/articles/${usefulData.articles[0]._id}/comments`)
+            .send({commentText: 'This is another test comment'})
+            .expect(200)
+            .then(res => {
+              timeStamp2 = res.body.comment.created_at;
+
+              expect(timeStamp1).to.not.equal(timeStamp2);
+              expect(timeStamp1).to.be.lessThan(timeStamp2);
+            })
+        })
+    })
   });
 
   describe('PUT /articles/:article_id?vote=up', () => {

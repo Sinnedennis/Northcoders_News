@@ -53,6 +53,7 @@ function postCommentByArticle(req, res, next) {
       body: String(req.body.commentText),
       belongs_to: req.params.article_id,
       created_by: req.body.created_by,
+      created_at: Date.now()
     })
 
     newComment.save()

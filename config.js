@@ -1,4 +1,3 @@
-require('dotenv').config();
 const {USERNAME, PASSWORD} = process.env;
 
 module.exports = {

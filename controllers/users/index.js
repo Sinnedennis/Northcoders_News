@@ -1,7 +1,7 @@
-const { Users } = require('../../models');
+const { User } = require('../../models');
 
 function getUserByUseName(req, res, next) {
-  Users.find({ username: req.params.username })
+  User.find({ username: req.params.username })
     .then(user => {
       res.send(user[0]);
     })
@@ -12,7 +12,7 @@ function getUserByUseName(req, res, next) {
 }
 
 function getAllUsers (req, res, next) {
-  Users.find()
+  User.find()
     .then(users => {
       res.send(users);
     })

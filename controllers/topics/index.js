@@ -1,16 +1,16 @@
-const { Articles, Topics } = require('../../models');
+const { Article, Topic } = require('../../models');
 
 function getAllTopics(req, res, next) {
-  Topics.find()
+  Topic.find()
     .then(topics => res.send(topics))
     .catch(err => next(err));
 }
 
 function getArticlesByTopic(req, res, next) {
   const topicID = req.params.topic_id;
-  Topics.findById(topicID)
+  Topic.findById(topicID)
     .then(topic => {
-      return Articles.find({ belongs_to: topic.slug });
+      return Article.find({ belongs_to: topic.slug });
     })
     .then(articles => { res.send(articles); })
     .catch(err => {

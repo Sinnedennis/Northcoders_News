@@ -4,7 +4,7 @@ const { expect } = require('chai');
 const request = require('supertest');
 const saveTestData = require('../seed/test.seed');
 const app = require('../server');
-const { Users, Articles, Comments, Topics } = require('../models');  // eslint-disable-line
+const { Comment } = require('../models');  // eslint-disable-line
 
 describe('API', () => {
   let usefulData;
@@ -92,13 +92,12 @@ describe('API', () => {
     it('receives a {comment} and adds it to a specific article in the db', () => {
 
       return request(app).post(`/api/articles/${usefulData.articles[0]._id}/comments`)
-        .send({commentText: 'This is a test comment'})
+        .send({ commentText: 'This is a test comment' })
         .expect(200)
         .then(res => {
           expect(res.body.message).to.equal('Comment successfully inserted!');
           expect(res.body.comment.body).to.equal('This is a test comment');
-
-          return Comments.findById(res.body.comment._id);
+          return Comment.findById(res.body.comment._id);
         })
         .then(queryRes => {
           expect(queryRes.body).to.equal('This is a test comment');
@@ -109,18 +108,18 @@ describe('API', () => {
       let timeStamp1, timeStamp2;
 
       return request(app).post(`/api/articles/${usefulData.articles[0]._id}/comments`)
-        .send({commentText: 'This is a test comment'})
+        .send({ commentText: 'This is a test comment' })
         .expect(200)
         .then(res => {
           timeStamp1 = res.body.comment.created_at;
 
-          return new Promise(function(resolve) { 
+          return new Promise(function (resolve) {
             setTimeout(resolve, 200);
           });
         })
         .then(() => {
           return request(app).post(`/api/articles/${usefulData.articles[0]._id}/comments`)
-            .send({commentText: 'This is another test comment'})
+            .send({ commentText: 'This is another test comment' })
             .expect(200)
             .then(res => {
               timeStamp2 = res.body.comment.created_at;

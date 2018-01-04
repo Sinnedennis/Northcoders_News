@@ -1,8 +1,8 @@
-const { Comments } = require('../../models');
+const { Comment } = require('../../models');
 const { getVoteValue } = require('../utils.js');
 
 function deleteCommentById(req, res) {
-  Comments.findByIdAndRemove(req.params.comment_id)
+  Comment.findByIdAndRemove(req.params.comment_id)
     .then(deletedComment => {
       res.send({ message: 'Comment successfully deleted', deletedComment });
     });
@@ -17,7 +17,7 @@ function putVoteOnComment(req, res, next) {
     res.send({ message: 'Article not voted.', wasSuccessful: false });
   }
 
-  Comments.findByIdAndUpdate(req.params.comment_id, { $inc: { votes: vote.value } }, { new: true })
+  Comment.findByIdAndUpdate(req.params.comment_id, { $inc: { votes: vote.value } }, { new: true })
     .then((comment) => {
       res.send({ message: `Comment ${vote.string}voted!`, wasSuccessful: true, votedData: comment });
     })

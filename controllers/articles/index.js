@@ -1,9 +1,9 @@
-const { Articles, Comments } = require('../../models');
+const { Article, Comment } = require('../../models');
 const { getVoteValue } = require('../utils.js');
 
 
 function getAllArticles(req, res, next) {
-  Articles.find()
+  Article.find()
     .then(articles => res.send({ articles }))
     .catch(err => next(err));
 }
@@ -12,7 +12,7 @@ function getAllArticles(req, res, next) {
 function getArticleById(req, res, next) {
   const articleId = req.params.article_id;
 
-  Articles.findById(articleId)
+  Article.findById(articleId)
     .then(article => {
       res.send({ article });
     })
@@ -22,7 +22,8 @@ function getArticleById(req, res, next) {
 
 function getCommentsByArticle(req, res, next) {
   const articleID = req.params.article_id;
-  Comments.find({ belongs_to: articleID })
+
+  Comment.find({ belongs_to: articleID })
     .then(comments => res.send({ comments }))
     .catch(err => {
       if (err.name === 'CastError') return next({ err, type: 404 });
@@ -33,7 +34,7 @@ function getCommentsByArticle(req, res, next) {
 
 function postCommentByArticle(req, res, next) {
 
-  let newComment = new Comments(
+  let newComment = new Comment(
     {
       body: String(req.body.commentText),
       belongs_to: req.params.article_id,
@@ -43,7 +44,7 @@ function postCommentByArticle(req, res, next) {
 
   newComment.save()
     .then((savedComment) => {
-      return Comments.findById(savedComment._id);
+      return Comment.findById(savedComment._id);
     })
     .then((insertedComment) => {
       res.send({
@@ -67,7 +68,7 @@ function putVoteOnArticle(req, res, next) {
     res.send({ message: 'Article not voted.', wasSuccessful: false });
   }
 
-  Articles.findByIdAndUpdate(req.params.article_id, { $inc: { votes: vote.value } }, { new: true })
+  Article.findByIdAndUpdate(req.params.article_id, { $inc: { votes: vote.value } }, { new: true })
     .then((article) => {
       res.send({ message: `Article ${vote.string}voted!`, wasSuccessful: true, votedData: article });
     })

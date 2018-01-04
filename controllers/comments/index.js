@@ -1,4 +1,4 @@
-const { Comments } = require('../../models/models');
+const { Comments } = require('../../models');
 const { getVoteValue } = require('../utils.js');
 
 function deleteCommentById(req, res) {
@@ -14,7 +14,7 @@ function putVoteOnComment(req, res, next) {
 
   if (vote === false) {
     res.status(400);
-    res.send({ message: `Article not voted.`, wasSuccessful: false })
+    res.send({ message: 'Article not voted.', wasSuccessful: false });
   }
 
   Comments.findByIdAndUpdate(req.params.comment_id, { $inc: { votes: vote.value } }, { new: true })
@@ -24,7 +24,7 @@ function putVoteOnComment(req, res, next) {
     .catch(err => {
       if (err.name === 'CastError') return next({ err, type: 404 });
       next(err);
-    })
+    });
 }
 
 module.exports = { deleteCommentById, putVoteOnComment };

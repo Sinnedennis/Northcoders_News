@@ -9,7 +9,7 @@ module.exports = {
 
     } else if (req.query.vote.toLowerCase() === 'down') {
       vote.value = -1;
-      vote.string = 'down'
+      vote.string = 'down';
 
     } else return false;
 

@@ -4,7 +4,7 @@ const { expect } = require('chai');
 const request = require('supertest');
 const saveTestData = require('../seed/test.seed');
 const app = require('../server');
-const { Users, Articles, Comments, Topics } = require('../models/models');  // eslint-disable-line
+const { Users, Articles, Comments, Topics } = require('../models');  // eslint-disable-line
 
 describe('API', () => {
   let usefulData;
@@ -115,7 +115,7 @@ describe('API', () => {
           timeStamp1 = res.body.comment.created_at;
 
           return new Promise(function(resolve) { 
-            setTimeout(resolve, 200)
+            setTimeout(resolve, 200);
           });
         })
         .then(() => {
@@ -127,9 +127,9 @@ describe('API', () => {
 
               expect(timeStamp1).to.not.equal(timeStamp2);
               expect(timeStamp1).to.be.lessThan(timeStamp2);
-            })
-        })
-    })
+            });
+        });
+    });
   });
 
   describe('PUT /articles/:article_id?vote=up', () => {
@@ -222,7 +222,7 @@ describe('API', () => {
 
   describe('GET /users/', () => {
     it('sends back all users', () => {
-      return request(app).get(`/api/users/`)
+      return request(app).get('/api/users/')
         .expect(200)
         .then((res) => {
           expect(res.body.length).to.equal(usefulData.user.length);
@@ -230,7 +230,7 @@ describe('API', () => {
           res.body.forEach((user) => {
             expect(user).to.have.a.property('username');
             expect(user).to.have.a.property('name');
-          })
+          });
         });
     });
   });

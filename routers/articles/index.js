@@ -6,7 +6,7 @@ const {
   getCommentsByArticle,
   postCommentByArticle,
   putVoteOnArticle
-      } = require('../../controllers/articles');
+} = require('../../controllers/articles');
 
 
 ArticleRouter.get('/', getAllArticles);

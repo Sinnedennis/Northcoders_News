@@ -1,7 +1,7 @@
-const TopicRouter = require('./topics');
-const ArticleRouter = require('./articles');
-const CommentRouter = require('./comments');
-const UserRouter = require('./users');
+const TopicRouter = require('../topics');
+const ArticleRouter = require('../articles');
+const CommentRouter = require('../comments');
+const UserRouter = require('../users');
 
 const APIRouter = require('express').Router();
 

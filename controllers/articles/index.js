@@ -1,5 +1,6 @@
-const { Articles, Comments } = require('../../models/models');
+const { Articles, Comments } = require('../../models');
 const { getVoteValue } = require('../utils.js');
+
 
 function getAllArticles(req, res, next) {
   Articles.find()
@@ -7,15 +8,17 @@ function getAllArticles(req, res, next) {
     .catch(err => next(err));
 }
 
+
 function getArticleById(req, res, next) {
   const articleId = req.params.article_id;
 
   Articles.findById(articleId)
     .then(article => {
-      res.send({ article })
+      res.send({ article });
     })
     .catch(err => next(err));
 }
+
 
 function getCommentsByArticle(req, res, next) {
   const articleID = req.params.article_id;
@@ -27,6 +30,7 @@ function getCommentsByArticle(req, res, next) {
     });
 }
 
+
 function postCommentByArticle(req, res, next) {
 
   let newComment = new Comments(
@@ -35,9 +39,9 @@ function postCommentByArticle(req, res, next) {
       belongs_to: req.params.article_id,
       created_by: req.body.created_by,
       created_at: Date.now()
-    })
+    });
 
-    newComment.save()
+  newComment.save()
     .then((savedComment) => {
       return Comments.findById(savedComment._id);
     })
@@ -48,11 +52,11 @@ function postCommentByArticle(req, res, next) {
       });
     })
     .catch(err => {
-      console.log(err);
       if (err.name === 'CastError') return next({ err, type: 404 });
       next(err);
     });
 }
+
 
 function putVoteOnArticle(req, res, next) {
 
@@ -60,7 +64,7 @@ function putVoteOnArticle(req, res, next) {
 
   if (vote === false) {
     res.status(400);
-    res.send({ message: `Article not voted.`, wasSuccessful: false })
+    res.send({ message: 'Article not voted.', wasSuccessful: false });
   }
 
   Articles.findByIdAndUpdate(req.params.article_id, { $inc: { votes: vote.value } }, { new: true })
@@ -72,5 +76,6 @@ function putVoteOnArticle(req, res, next) {
       next(err);
     });
 }
+
 
 module.exports = { getAllArticles, getArticleById, getCommentsByArticle, postCommentByArticle, putVoteOnArticle };

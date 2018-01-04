@@ -1,4 +1,4 @@
-const { Users } = require('../../models/models');
+const { Users } = require('../../models');
 
 function getUserByUseName(req, res, next) {
   Users.find({ username: req.params.username })
@@ -13,13 +13,13 @@ function getUserByUseName(req, res, next) {
 
 function getAllUsers (req, res, next) {
   Users.find()
-  .then(users => {
-    res.send(users);
-  })
-  .catch(err => {
-    if (err.name === 'CastError') return next({ err, type: 404 });
-    next(err);
-  });
+    .then(users => {
+      res.send(users);
+    })
+    .catch(err => {
+      if (err.name === 'CastError') return next({ err, type: 404 });
+      next(err);
+    });
 }
 
 module.exports = { getUserByUseName, getAllUsers };

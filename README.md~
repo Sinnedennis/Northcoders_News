@@ -80,6 +80,6 @@ Testing was done using supertest, mocha and chai through a Test Driven Developme
 * [mongoDB](https://www.mongodb.com)
 * [mongoose](http://mongoosejs.com/)
 
-## Author
+## Authors
 
 [Dennis Foster](https://github.com/Sinnedennis)

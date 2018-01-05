@@ -58,7 +58,7 @@ npm start
 ```
 This will run the server on PORT 3090 and can be accessed at htttp://localhost:3090 which will display a page with all the available routes.
 
-If you wish to use a hosted MongoDB from [mlab](https://mlab.com/), you will need to create a .env file in the root of the folder with the following contents
+If you wish to use a hosted MongoDB from [mlab](https://mlab.com/), you will need to change the dev database url in config.js and create a .env file in the root of the folder with the following contents
 ```
 USERNAME=<username here>
 PASSWORD=<password here>

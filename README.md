@@ -9,7 +9,7 @@ ___
 * [Installation](https://github.com/Sinnedennis/Northcoders_News_Back_End#installation)
 * [Usage](https://github.com/Sinnedennis/Northcoders_News_Back_End#usage)
 * [Endpoints](https://github.com/Sinnedennis/Northcoders_News_Back_End#endpoints)
-* [Depenencies](https://github.com/Sinnedennis/Northcoders_News_Back_End#depenencies)
+* [Depenencies](https://github.com/Sinnedennis/Northcoders_News_Back_End#dependencies)
 ___
 ### Setup
 
@@ -54,7 +54,7 @@ ___
     node seed/seed.js
     ```
 ___
-## Useage
+## Usage
 
 To start the server run the following command
 ```

@@ -1,85 +1,97 @@
-# Northcoders News BE
+# Northcoders News Back-end
 
-This project was written as a back-end to support a reddit style news website front-end using [Express](https://expressjs.com/) and [MongoDB](https://www.mongodb.com/). 
+An API built with [MongoDB](https://www.mongodb.com/) and [Express](https://expressjs.com/) to serve data to a responsive single page application [repo](https://github.com/Sinnedennis/Northcoders_News_Front_End)
+___
 
-## Getting Started
+## Table of contents
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+* [Setup](https://github.com/Sinnedennis/Northcoders_News_Front_End#setup)
+* [Installation](https://github.com/Sinnedennis/Northcoders_News_Front_End#installation)
+* [Usage](https://github.com/Sinnedennis/Northcoders_News_Front_End#usage)
+* [Endpoints](https://github.com/Sinnedennis/Northcoders_News_Front_End#endpoints)
+* [Depenencies](https://github.com/Sinnedennis/Northcoders_News_Front_End#depenencies)
+___
+### Setup
 
+1. Ensure that your machine is running Node version 7 or above. To check what version you are running, open a terminal window and type:
+    ``` 
+    node -v
+    ```
+    If you do not receive a response in the format of v7.2.1, or your version of Node is older than 7x, [click here](https://nodejs.org/en/) to download and install Node from the official website.
+   
+2. Ensure you have Node Package Manager (NPM) installed. As above, open a terminal window and type:
+    ``` 
+    npm -v
+    ```
+    If you do not receive a response in the format of v5.5.1, or your version of NPM is older than 5x, type the following commands into your terminal:
+    ``` 
+    npm install npm
+    ```
+    If you run into any issues with the above steps, [click here](https://docs.npmjs.com/getting-started/installing-node) to follow NPM's official guide to installing Node and NPM.
 
-### Prerequisites
+3. Ensure that your machine is running MongoDB installed and running in a terminal when using the API. To run in your terminal, type this command
+    ```
+    mongod --version
+    ```
+    If you do not receive a response in the format of v2.6.12, or your version of NPM is older than 2.6, follow this [guide](https://www.mongodb.com/).
+___
+### Installation
 
-You will need to have Node v7 and above installed on your system. To check if you have it installed type the following command in your terminal which will return your version.
-
-```
-node -v
-```
-You will also need to check that npm is installed along with node. To check type the following
-```
-npm -v
-```
-If you do not have node or npm installed, follow this [guide](https://nodejs.org/en/download/package-manager/).
-
-You will need MongoDB installed and running in a terminal when using the API. To run in your terminal, type this command
-```
-mongod
-```
-If you do not have MongoDB installed, follow this [guide](https://www.mongodb.com/).
-
-You will also need git installed on your machine. To check that you have it installed type the following command
-```
-git --version
-```
-If you do not have it installed follow this [guide](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
-
-### Installing
-
-In order to install this project make sure you are in a directory you wish to install in your terminal and run the following command
-```
-git clone https://github.com/Sinnedennis/Northcoders_News_Back_End
-```
-then navigate into the folder and run
-```
-npm install
-```
-In a separate terminal run the following command to connect to the database and keep it running when running the server
-```
-mongod
-```
-then to populate the databse run 
-```
-node seed/seed.js
-```
-## Running the server
+1. Open a terminal window, navigate to the directory where you wish to install this repository, and run the following command:
+    ```
+    git clone https://github.com/Sinnedennis/Northcoders_News_Back_End
+    ```
+2. Navigate into the freshly-cloned directory and run:
+    ```
+    npm install
+    ```
+    In a separate terminal, run the following command to connect to the database. You must let this terminal window idle to maintain the connection.
+    ```
+    mongod
+    ```
+    then run the following command to populate the databse:
+    ```
+    node seed/seed.js
+    ```
+___
+## Useage
 
 To start the server run the following command
 ```
 npm start
 ```
-This will run the server on PORT 3090 and can be accessed at htttp://localhost:3090 which will display a page with all the available routes.
+This will run the server on PORT 3090 and can be accessed at http://localhost:3090. I would recommend [Postman](https://www.getpostman.com/) for making local Put, Post, Delete etc requests.
 
-If you wish to use a hosted MongoDB from [mlab](https://mlab.com/), you will need to change the dev database url in config.js and create a .env file in the root of the folder with the following contents
-```
-USERNAME=<username here>
-PASSWORD=<password here>
-```
-## Running the tests
-
-To run the tests enter the following command 
+To run the testing suite, type: 
 ```
 npm t
 ```
-Testing was done using supertest, mocha and chai through a Test Driven Development approach.
+___
 
-
-## Built With
-* [supertest](https://github.com/visionmedia/supertest)
-* [mocha](https://mochajs.org/)
-* [chai](http://chaijs.com/)
-* [express](https://expressjs.com/)
-* [mongoDB](https://www.mongodb.com)
-* [mongoose](http://mongoosejs.com/)
-
-## Author
-
-[Dennis Foster](https://github.com/Sinnedennis)
+## Endpoints
+|    Description    | URL          |
+|:-------------:|:-------------|
+|Get all articles         | /api/articles                       |
+|Get article by ID        | /api/articles/:article_id           |
+|Get comments on article  | /api/articles/:article_id/comments  |
+|Put vote on article      | /api/articles/:article_id/          |
+|Post comment on article  | /api/articles/:article_id/comments  |
+|                         |                                     |
+|Put vote on comment      | /api/comments/:comment_id           |
+|Delete comment           | /api/comments/:comment_id           | 
+|                         |                                     | 
+|Get all topics           | /api/topics                         |
+|Get articles by topic    | /api/topics/:topic_id/articles      |
+|                         |                                     |
+|Get all users            | /api/users                          |
+|Get user by username     | /api/user/:username                 |
+___
+## Dependencies
+|    Package    | Use          |
+|:-------------:|:-------------|
+| [supertest](https://github.com/visionmedia/supertest) | HTTP mocking and testing library  |
+| [mocha](https://mochajs.org/)                         | Testing environment               |
+| [chai](http://chaijs.com/)                            | Assertion library                 |
+| [express](https://expressjs.com/)                     | Server library                    |
+| [mongoDB](https://www.mongodb.com)                    | MongoDB driver                    |
+| [mongoose](http://mongoosejs.com/)                    | MongoDB Object Modelling library  |

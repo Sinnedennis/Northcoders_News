@@ -1,15 +1,15 @@
 # Northcoders News Back-end
 
-An API built with [MongoDB](https://www.mongodb.com/) and [Express](https://expressjs.com/) to serve data to a responsive single page application [repo](https://github.com/Sinnedennis/Northcoders_News_Front_End)
+An API built with [MongoDB](https://www.mongodb.com/) and [Express](https://expressjs.com/) to serve data to a [responsive single page application](https://github.com/Sinnedennis/Northcoders_News_Front_End)
 ___
 
 ## Table of contents
 
-* [Setup](https://github.com/Sinnedennis/Northcoders_News_Front_End#setup)
-* [Installation](https://github.com/Sinnedennis/Northcoders_News_Front_End#installation)
-* [Usage](https://github.com/Sinnedennis/Northcoders_News_Front_End#usage)
-* [Endpoints](https://github.com/Sinnedennis/Northcoders_News_Front_End#endpoints)
-* [Depenencies](https://github.com/Sinnedennis/Northcoders_News_Front_End#depenencies)
+* [Setup](https://github.com/Sinnedennis/Northcoders_News_Back_End#setup)
+* [Installation](https://github.com/Sinnedennis/Northcoders_News_Back_End#installation)
+* [Usage](https://github.com/Sinnedennis/Northcoders_News_Back_End#usage)
+* [Endpoints](https://github.com/Sinnedennis/Northcoders_News_Back_End#endpoints)
+* [Depenencies](https://github.com/Sinnedennis/Northcoders_News_Back_End#depenencies)
 ___
 ### Setup
 

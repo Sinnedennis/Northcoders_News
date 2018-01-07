@@ -22,7 +22,7 @@ app.use(cors(), bodyParser.json());
 app.use('/api', APIRouter);
 
 app.use('/', (req, res) => {
-  res.status(200).send({message: 'Hello! This the backend API used in my Northcoders News project. Click the example links below to see the endpoints available'});
+  res.status(200).send({message: 'Hello! This the backend API used in my Northcoders News project. Please visit my repo for more information: https://github.com/Sinnedennis/Northcoders_News_Back_End'});
 });
 
 app.use('/*', (req, res) => {

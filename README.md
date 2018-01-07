@@ -1,6 +1,6 @@
 # Northcoders News Back-end
 
-An API built with [MongoDB](https://www.mongodb.com/) and [Express](https://expressjs.com/) to serve data to a [responsive single page application](https://github.com/Sinnedennis/Northcoders_News_Front_End)
+An API built with [MongoDB](https://www.mongodb.com/) and [Express](https://expressjs.com/) to serve data to a [responsive single page application](https://github.com/Sinnedennis/Northcoders_News_Front_End).
 ___
 
 ## Table of contents
@@ -33,11 +33,11 @@ ___
     ```
     mongod --version
     ```
-    If you do not receive a response in the format of v2.6.12, or your version of NPM is older than 2.6, follow this [guide](https://www.mongodb.com/).
+    If you do not receive a response in the format of v2.6.12, or your version of MongoDB is older than 2.6, follow this [guide](https://www.mongodb.com/).
 ___
 ### Installation
 
-1. Open a terminal window, navigate to the directory where you wish to install this repository, and run the following command:
+1. Open a terminal window, navigate to the directory where you wish to install this project, and run the following command:
     ```
     git clone https://github.com/Sinnedennis/Northcoders_News_Back_End
     ```
@@ -60,7 +60,7 @@ To start the server run the following command
 ```
 npm start
 ```
-This will run the server on PORT 3090 and can be accessed at http://localhost:3090. I would recommend [Postman](https://www.getpostman.com/) for making local Put, Post, Delete etc requests.
+This will run the server on PORT 3090 and can be accessed at http://localhost:3090. I would recommend [Postman](https://www.getpostman.com/) for making Put, Post, Delete etc requests.
 
 To run the testing suite, type: 
 ```

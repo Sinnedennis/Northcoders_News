@@ -1,6 +1,6 @@
 # Northcoders News Back-end
 
-An API built with [MongoDB](https://www.mongodb.com/) and [Express](https://expressjs.com/) to serve data to a [responsive single page application](https://github.com/Sinnedennis/Northcoders_News_Front_End).
+An API built with [MongoDB](https://www.mongodb.com/) and [Express](https://expressjs.com/) to serve data to a responsive single page application [found here](https://github.com/Sinnedennis/Northcoders_News_Front_End).
 ___
 
 ## Table of contents
@@ -29,7 +29,7 @@ ___
     ```
     If you run into any issues with the above steps, [click here](https://docs.npmjs.com/getting-started/installing-node) to follow NPM's official guide to installing Node and NPM.
 
-3. Ensure that your machine is running MongoDB installed and running in a terminal when using the API. To run in your terminal, type this command
+3. Ensure that you have MongoDB installed.To check what version you are running, open a terminal window and type:
     ```
     mongod --version
     ```
@@ -45,7 +45,7 @@ ___
     ```
     npm install
     ```
-    In a separate terminal, run the following command to connect to the database. You must let this terminal window idle to maintain the connection.
+    In a separate terminal, run the following command to connect to the database. **You must leave this terminal window unhindered to maintain a connection to the database.**
     ```
     mongod
     ```
@@ -56,7 +56,7 @@ ___
 ___
 ## Usage
 
-To start the server run the following command
+To start the server run the following command:
 ```
 npm start
 ```

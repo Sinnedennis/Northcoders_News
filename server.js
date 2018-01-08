@@ -11,7 +11,7 @@ mongoose.Promise = Promise;
 
 const APIRouter = require('./routers/api');
 
-mongoose.connect(db, {useMongoClient: true})
+mongoose.connect(db, { useMongoClient: true })
   .then(() => console.log('successfully connected to', db)) // eslint-disable-line
   .catch(err => console.log('connection failed', err)); // eslint-disable-line
 
@@ -22,22 +22,23 @@ app.use(cors(), bodyParser.json());
 app.use('/api', APIRouter);
 
 app.use('/', (req, res) => {
-  res.status(200).send({message: 'Hello! This the backend API used in my Northcoders News project. Please visit my repo for more information: https://github.com/Sinnedennis/Northcoders_News_Back_End'});
+  res.status(200).send({ message: 'Hello! This the backend API used in my Northcoders News project. Please visit my repo for more information: https://github.com/Sinnedennis/Northcoders_News_Back_End' });
 });
 
 app.use('/*', (req, res) => {
-  res.status(404).send({message: 'Page Not Found'});
+  res.status(404).send({ message: 'Page Not Found' });
 });
 
 //Error handling
 app.use((err, req, res, next) => {
-  if(err.type === 404) return res.status(404).send({message: 'Page not found'});
+  if (err.type === 404) return res.status(404).send({ message: 'Page not found' });
+  if (err.type === 400) return res.status(400).send({ message: 'Cast error: bad request' });
   next(err);
 });
 
 //Error handling
 app.use((err, req, res) => {
-  res.status(500).send({err});
+  res.status(500).send({ err });
 });
 
 module.exports = app;

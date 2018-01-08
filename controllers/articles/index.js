@@ -26,7 +26,7 @@ function getCommentsByArticle(req, res, next) {
   Comment.find({ belongs_to: articleID })
     .then(comments => res.send({ comments }))
     .catch(err => {
-      if (err.name === 'CastError') return next({ err, type: 404 });
+      if (err.name === 'CastError') return next({ err, type: 400 });
       next(err);
     });
 }
@@ -53,7 +53,7 @@ function postCommentByArticle(req, res, next) {
       });
     })
     .catch(err => {
-      if (err.name === 'CastError') return next({ err, type: 404 });
+      if (err.name === 'CastError') return next({ err, type: 400 });
       next(err);
     });
 }
@@ -73,7 +73,7 @@ function putVoteOnArticle(req, res, next) {
       res.send({ message: `Article ${vote.string}voted!`, wasSuccessful: true, votedData: article });
     })
     .catch(err => {
-      if (err.name === 'CastError') return next({ err, type: 404 });
+      if (err.name === 'CastError') return next({ err, type: 400 });
       next(err);
     });
 }

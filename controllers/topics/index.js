@@ -14,7 +14,7 @@ function getArticlesByTopic(req, res, next) {
     })
     .then(articles => { res.send(articles); })
     .catch(err => {
-      if (err.name === 'CastError') return next({ err, type: 404 });
+      if (err.name === 'CastError') return next({ err, type: 400 });
       next(err);
     });
 }

@@ -1,6 +1,6 @@
 # Northcoders News Back-end
 
-An API built with [MongoDB](https://www.mongodb.com/) and [Express](https://expressjs.com/) to serve data to a [responsive single page application](https://github.com/Sinnedennis/Northcoders_News_Front_End).
+An API built with [MongoDB](https://www.mongodb.com/) and [Express](https://expressjs.com/) to serve data to a responsive single page application which can be viewed in its deployed form by clicking [here](https://north-coding-news.herokuapp.com/). To see the application's code repository, [click here](https://github.com/Sinnedennis/Northcoders_News_Front_End). The brief was the create a single page application showing community-rated content in the theme of reddit. This project contains the API for serving the data, as well as seeding files to populate the database with mock articles and comments.
 ___
 
 ## Table of contents

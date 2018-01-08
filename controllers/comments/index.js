@@ -22,7 +22,7 @@ function putVoteOnComment(req, res, next) {
       res.send({ message: `Comment ${vote.string}voted!`, wasSuccessful: true, votedData: comment });
     })
     .catch(err => {
-      if (err.name === 'CastError') return next({ err, type: 404 });
+      if (err.name === 'CastError') return next({ err, type: 400 });
       next(err);
     });
 }

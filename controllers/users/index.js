@@ -6,18 +6,18 @@ function getUserByUseName(req, res, next) {
       res.send(user[0]);
     })
     .catch(err => {
-      if (err.name === 'CastError') return next({ err, type: 404 });
+      if (err.name === 'CastError') return next({ err, type: 400 });
       next(err);
     });
 }
 
-function getAllUsers (req, res, next) {
+function getAllUsers(req, res, next) {
   User.find()
     .then(users => {
       res.send(users);
     })
     .catch(err => {
-      if (err.name === 'CastError') return next({ err, type: 404 });
+      if (err.name === 'CastError') return next({ err, type: 400 });
       next(err);
     });
 }

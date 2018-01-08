@@ -1,4 +1,4 @@
-const {USERNAME, PASSWORD} = process.env;
+const { USERNAME, PASSWORD } = process.env;
 
 module.exports = {
   DB: {

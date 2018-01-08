@@ -38,11 +38,11 @@ describe('API', () => {
           expect(res.body[0].title).to.be.a('string');
         });
     });
-    it('returns 404 when given an invalid param', () => {
+    it('returns 400 when given an invalid param', () => {
       return request(app).get('/api/topics/hello/articles')
-        .expect(404)
+        .expect(400)
         .then(res => {
-          expect(res.body.message).to.equal('Page not found');
+          expect(res.body.message).to.equal('Cast error: bad request');
         });
     });
   });
@@ -79,11 +79,11 @@ describe('API', () => {
           expect(res.body.comments[0].body).to.be.a('string');
         });
     });
-    it('returns 404 when given an invalid param', () => {
+    it('returns 400 when given an invalid param', () => {
       return request(app).get('/api/articles/hello/comments')
-        .expect(404)
+        .expect(400)
         .then(res => {
-          expect(res.body.message).to.equal('Page not found');
+          expect(res.body.message).to.equal('Cast error: bad request');
         });
     });
   });
